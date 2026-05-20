@@ -1,32 +1,28 @@
 ! name: AI Focus
-! description: Re-ranks Brave Search toward primary AI/ML sources - research, labs, model hubs, agent frameworks, docs and quality news. Buries SEO spam and listicles. Updated 2026.
+! description: Reranks Brave Search toward primary AI/ML sources - research papers, frontier labs, model hubs, agent frameworks, docs and quality news. Buries SEO spam and listicles.
 ! public: true
 ! author: nick
 ! avatar: #6b4fbb
-! homepage: https://github.com/brave/goggles-quickstart
+! homepage: https://github.com/TheNickCoolst/brave-goggles
 
 ! ======================================================================
-! AI FOCUS GOGGLE  -  v2  (2026-05)
-! Re-ranks Brave Search results toward primary AI/ML sources.
-!
+! AI FOCUS GOGGLE  -  v3  (2026-05)
+! Reranks Brave Search results toward primary AI/ML sources.
 ! Syntax: https://github.com/brave/goggles-quickstart
-!   boost=N      raise ranking      (1-10, higher = stronger)
-!   downrank=N   lower ranking      (1-10)
-!   discard      remove from result
-!   site=        exact site / subdomain
-!   inurl=       substring in URL
-!   intitle=     substring in page title
-! Note: Goggles only RE-ORDER Brave's index. They add no new pages.
+!   $boost=N        raise ranking   (1-10)
+!   $downrank=N     lower ranking   (1-10)
+!   $discard        remove result
+!   site=domain     limit to a site
+!   /path           plain pattern, matches inside the URL
+! Note: Goggles only REORDER Brave's index. They add no new pages.
 ! ======================================================================
 
 
-! ======================================================================
-! 1. RESEARCH PAPERS & PREPRINTS
-! ======================================================================
+! ===== 1. RESEARCH PAPERS & PREPRINTS =================================
 $boost=10,site=arxiv.org
 $boost=9,site=paperswithcode.com
 $boost=8,site=openreview.net
-$boost=8,site=huggingface.co,inurl=papers
+/papers$boost=8,site=huggingface.co
 $boost=7,site=semanticscholar.org
 $boost=7,site=aclanthology.org
 $boost=6,site=distill.pub
@@ -36,20 +32,18 @@ $boost=6,site=proceedings.neurips.cc
 $boost=5,site=ar5iv.labs.arxiv.org
 $boost=5,site=connectedpapers.com
 $boost=5,site=scholar.google.com
-$boost=5,site=nature.com,inurl=articles
+/articles$boost=5,site=nature.com
 $boost=4,site=biorxiv.org
 $boost=4,site=ssrn.com
 
 
-! ======================================================================
-! 2. FRONTIER AI LABS & COMPANY RESEARCH
-! ======================================================================
+! ===== 2. FRONTIER AI LABS & COMPANY RESEARCH =========================
 $boost=10,site=openai.com
 $boost=10,site=anthropic.com
 $boost=10,site=deepmind.google
 $boost=9,site=ai.meta.com
 $boost=9,site=research.google
-$boost=9,site=blog.google,inurl=technology
+/technology/ai$boost=9,site=blog.google
 $boost=9,site=mistral.ai
 $boost=8,site=x.ai
 $boost=8,site=cohere.com
@@ -64,19 +58,17 @@ $boost=7,site=midjourney.com
 $boost=7,site=runwayml.com
 $boost=7,site=elevenlabs.io
 $boost=7,site=suno.com
-$boost=6,site=microsoft.com,inurl=research
-$boost=6,site=nvidia.com,inurl=research
+/research$boost=6,site=microsoft.com
+$boost=6,site=research.nvidia.com
 $boost=6,site=research.ibm.com
-$boost=6,site=apple.com,inurl=machine-learning
+$boost=6,site=machinelearning.apple.com
 $boost=6,site=deepseek.com
 $boost=6,site=qwen.ai
 $boost=6,site=z.ai
 $boost=6,site=moonshot.ai
 
 
-! ======================================================================
-! 3. ACADEMIC AI LABS & INSTITUTES
-! ======================================================================
+! ===== 3. ACADEMIC AI LABS & INSTITUTES ===============================
 $boost=8,site=csail.mit.edu
 $boost=8,site=bair.berkeley.edu
 $boost=7,site=ai.stanford.edu
@@ -86,12 +78,10 @@ $boost=7,site=vectorinstitute.ai
 $boost=6,site=mila.quebec
 $boost=6,site=ml.cmu.edu
 $boost=6,site=oatml.cs.ox.ac.uk
-$boost=5,site=news.mit.edu,inurl=artificial-intelligence
+/artificial-intelligence$boost=5,site=news.mit.edu
 
 
-! ======================================================================
-! 4. MODEL HUBS, OPEN SOURCE & INFERENCE
-! ======================================================================
+! ===== 4. MODEL HUBS, OPEN SOURCE & INFERENCE =========================
 $boost=10,site=huggingface.co
 $boost=9,site=github.com
 $boost=7,site=kaggle.com
@@ -106,9 +96,7 @@ $boost=5,site=lmstudio.ai
 $boost=5,site=gitlab.com
 
 
-! ======================================================================
-! 5. AGENT FRAMEWORKS, LLM TOOLING & ORCHESTRATION
-! ======================================================================
+! ===== 5. AGENT FRAMEWORKS, LLM TOOLING & ORCHESTRATION ===============
 $boost=8,site=langchain.com
 $boost=7,site=docs.langchain.com
 $boost=7,site=llamaindex.ai
@@ -127,9 +115,7 @@ $boost=5,site=qdrant.tech
 $boost=5,site=modelcontextprotocol.io
 
 
-! ======================================================================
-! 6. FRAMEWORK & API DOCS
-! ======================================================================
+! ===== 6. FRAMEWORK & API DOCS ========================================
 $boost=8,site=pytorch.org
 $boost=8,site=tensorflow.org
 $boost=8,site=docs.anthropic.com
@@ -146,9 +132,7 @@ $boost=5,site=pandas.pydata.org
 $boost=5,site=fast.ai
 
 
-! ======================================================================
-! 7. COURSES & LEARNING (primary sources only)
-! ======================================================================
+! ===== 7. COURSES & LEARNING ==========================================
 $boost=7,site=deeplearning.ai
 $boost=6,site=d2l.ai
 $boost=6,site=spinningup.openai.com
@@ -157,48 +141,39 @@ $boost=5,site=karpathy.ai
 $boost=4,site=mlu-explain.github.io
 
 
-! ======================================================================
-! 8. QUALITY NEWS, ANALYSIS & COMMUNITY
-! ======================================================================
+! ===== 8. QUALITY NEWS, ANALYSIS & COMMUNITY ==========================
 $boost=5,site=technologyreview.com
 $boost=5,site=thegradient.pub
-$boost=4,site=arstechnica.com,inurl=ai
-$boost=4,site=techcrunch.com,inurl=artificial-intelligence
-$boost=4,site=theverge.com,inurl=ai-artificial-intelligence
-$boost=4,site=venturebeat.com,inurl=ai
+/ai/$boost=3,site=arstechnica.com
+/artificial-intelligence$boost=4,site=techcrunch.com
+/ai-artificial-intelligence$boost=4,site=theverge.com
+/ai/$boost=4,site=venturebeat.com
 $boost=4,site=semianalysis.com
 $boost=4,site=importai.net
 $boost=4,site=lesswrong.com
 $boost=4,site=alignmentforum.org
 $boost=4,site=news.ycombinator.com
-$boost=3,site=reddit.com,inurl=MachineLearning
-$boost=3,site=reddit.com,inurl=LocalLLaMA
+/r/MachineLearning$boost=3,site=reddit.com
+/r/LocalLLaMA$boost=3,site=reddit.com
 $boost=3,site=stats.stackexchange.com
 $boost=3,site=ai.stackexchange.com
 $boost=3,site=stackoverflow.com
-$boost=3,site=substack.com,inurl=ai
 
 
-! ======================================================================
-! 9. GENERIC CATCH-ALL BOOSTS (AI content anywhere)
-! ======================================================================
-$boost=2,inurl=arxiv
-$boost=2,intitle=transformer
-$boost=2,intitle=diffusion
-$boost=2,intitle=neural-network
-$boost=2,intitle=fine-tuning
-$boost=1,inurl=machine-learning
-$boost=1,inurl=deep-learning
-$boost=1,inurl=large-language-model
+! ===== 9. GENERIC URL CATCH-ALL BOOSTS ================================
+arxiv$boost=2
+/transformer$boost=1
+/neural-network$boost=1
+/machine-learning$boost=1
+/deep-learning$boost=1
+/large-language-model$boost=1
 
 
-! ======================================================================
-! 10. DOWNRANK - SEO SPAM, CONTENT FARMS, LISTICLES
-! ======================================================================
-$downrank=9,intitle=best-ai-tools
-$downrank=9,intitle=top-10-ai
-$downrank=9,intitle=top-ai-tools
-$downrank=8,inurl=best-ai
+! ===== 10. DOWNRANK - SEO SPAM, CONTENT FARMS, LISTICLES ==============
+best-ai-tools$downrank=9
+top-10-ai$downrank=9
+top-ai-tools$downrank=9
+best-ai$downrank=8
 $downrank=7,site=geeksforgeeks.org
 $downrank=7,site=analyticsvidhya.com
 $downrank=7,site=simplilearn.com
@@ -209,22 +184,20 @@ $downrank=6,site=medium.com
 $downrank=6,site=towardsdatascience.com
 $downrank=6,site=quora.com
 $downrank=6,site=pinterest.com
-$downrank=5,site=linkedin.com,inurl=pulse
+/pulse/$downrank=5,site=linkedin.com
 $downrank=5,site=upwork.com
 $downrank=5,site=fiverr.com
 $downrank=5,site=coursera.org
 $downrank=5,site=udemy.com
 
 
-! ======================================================================
-! 11. DISCARD - PURE JUNK & AI SLOP
-! ======================================================================
-$discard,intitle=ai-tools-2024
-$discard,intitle=ai-tools-2025
-$discard,intitle=ai-tools-2026
-$discard,inurl=ai-essay-writer
-$discard,inurl=ai-content-generator-free
-$discard,inurl=ai-paraphrasing-tool
-$discard,inurl=ai-image-generator-free
+! ===== 11. DISCARD - PURE JUNK & AI SLOP ==============================
+ai-tools-2024$discard
+ai-tools-2025$discard
+ai-tools-2026$discard
+ai-essay-writer$discard
+ai-content-generator-free$discard
+ai-paraphrasing-tool$discard
+ai-image-generator-free$discard
 $discard,site=w3schools.com
 $discard,site=byjus.com
